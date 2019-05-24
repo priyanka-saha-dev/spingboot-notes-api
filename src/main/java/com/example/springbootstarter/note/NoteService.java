@@ -36,8 +36,34 @@ public class NoteService {
 		repo.deleteById(id);
 	}
 	
-//	public void toggleFavourite(String id) {
-//		repo.toggleFavourite(id);
-//	}
+	public Boolean toggleFavourite(String id) {
+		Optional<Note> noteFound = repo.findById(id);
+		Note note;
+		if (noteFound.isPresent()) {
+			note = noteFound.get();
+			
+			Boolean isfav = note.getFav();
+			if(isfav == null) {
+				note.setFav(Boolean.FALSE);
+			} else {
+				note.setFav(!isfav);
+			}
+			
+			repo.save(note);
+			return note.getFav();
+		}
+		
+		return Boolean.FALSE;
+	}
+
+	public Boolean getFavourite(String id) {
+		Optional<Note> noteFound = repo.findById(id);
+
+		if (noteFound.isPresent()) {
+			return noteFound.get().getFav();
+		}
+		
+		return Boolean.FALSE;
+	}
 
 }

@@ -40,4 +40,14 @@ public class NoteController {
 		svc.deleteNote(id);
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT, value="/note/{id}/favourite")
+	private Boolean toggleFavourite(@PathVariable String id) {
+		return svc.toggleFavourite(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/note/{id}/favourite")
+	private Boolean getFavourite(@PathVariable String id) {
+		return svc.getFavourite(id);
+	}
+	
 }
